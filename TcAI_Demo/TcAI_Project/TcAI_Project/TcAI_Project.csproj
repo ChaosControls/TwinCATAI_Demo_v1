@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- .NET Framework 4.8 for best COM interop compatibility with TwinCAT AI -->
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <AssemblyName>TcAI_Project</AssemblyName>
+    <RootNamespace>TcAI_Project</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Visual Studio DTE COM automation — provides the EnvDTE namespace used
+         to drive TcXaeShell (and Visual Studio) via the automation interface. -->
+    <PackageReference Include="EnvDTE" Version="8.0.3" />
+  </ItemGroup>
+
+</Project>

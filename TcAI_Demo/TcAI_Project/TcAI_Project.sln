@@ -1,0 +1,25 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcAI_Project", "TcAI_Project\TcAI_Project.csproj", "{C1A0E2B3-D4F5-6789-ABCD-EF0123456789}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AnyCPU = Debug|AnyCPU
+		Release|AnyCPU = Release|AnyCPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1A0E2B3-D4F5-6789-ABCD-EF0123456789}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{C1A0E2B3-D4F5-6789-ABCD-EF0123456789}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{C1A0E2B3-D4F5-6789-ABCD-EF0123456789}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{C1A0E2B3-D4F5-6789-ABCD-EF0123456789}.Release|AnyCPU.Build.0 = Release|AnyCPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = preSolution
+		SolutionGuid = {D2B1F3A4-E5C6-7890-BCDE-F01234567890}
+	EndGlobalSection
+EndGlobal
