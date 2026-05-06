@@ -72,11 +72,18 @@ Write-Host "`nStep 2: Adding ADS route to '$($target.Name)'..."
 
 $credential = Get-Credential -Message "Enter credentials for TwinCAT target '$($target.Name)'"
 
+# Suppress the "Searching for Route" progress output from Add-AdsRoute
+# so it does not bleed into the credential prompt in the terminal.
+$savedProgress = $ProgressPreference
+$ProgressPreference = 'SilentlyContinue'
+
 $route = Add-AdsRoute `
     -NetId $target.NetId `
     -IPOrHostName $target.Address `
     -Credential $credential `
     -PassThru
+
+$ProgressPreference = $savedProgress
 
 if (-not $route) {
     Write-Error "Failed to add ADS route to '$($target.Name)'."
