@@ -86,14 +86,17 @@ namespace TcAI_Project
             catch (Exception ex)
             {
                 Console.Error.WriteLine($"Error: {ex.Message}");
-                try { dte?.Quit(); } catch { /* shell may already be gone */ }
+                // On failure only: shut down TcXaeShell and release the COM object.
+                if (dte != null)
+                {
+                    try { dte.Quit(); } catch { /* shell may already be gone */ }
+                    Marshal.ReleaseComObject(dte);
+                }
                 Environment.Exit(1);
             }
-            finally
-            {
-                if (dte != null)
-                    Marshal.ReleaseComObject(dte);
-            }
+            // On success: do NOT release the COM object or call Quit().
+            // UserControl = true means TcXaeShell is independent of this process,
+            // so just let the process exit — TcXaeShell stays open.
         }
 
         // ---------------------------------------------------------------------------
