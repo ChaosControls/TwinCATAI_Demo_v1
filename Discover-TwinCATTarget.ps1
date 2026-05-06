@@ -42,14 +42,22 @@ if (-not $allRoutes) {
 # Wrap in array to ensure Count works correctly for a single result
 $allRoutes = @($allRoutes)
 
-Write-Host "Found $($allRoutes.Count) target(s):"
-$allRoutes | Format-Table -AutoSize
+# Filter out the local machine — you cannot add an ADS route to yourself
+$remoteRoutes = @($allRoutes | Where-Object { $_.Name -ne $env:COMPUTERNAME })
 
-if ($allRoutes.Count -gt 1) {
-    Write-Warning "More than one target found. Expected exactly one. Using first: '$($allRoutes[0].Name)'"
+if ($remoteRoutes.Count -eq 0) {
+    Write-Error "No remote TwinCAT targets found (only the local machine was discovered)."
+    exit 1
 }
 
-$target = $allRoutes[0]
+Write-Host "Found $($remoteRoutes.Count) remote target(s):"
+$remoteRoutes | Format-Table -AutoSize
+
+if ($remoteRoutes.Count -gt 1) {
+    Write-Warning "More than one remote target found. Expected exactly one. Using first: '$($remoteRoutes[0].Name)'"
+}
+
+$target = $remoteRoutes[0]
 
 Write-Host "Selected target: '$($target.Name)'"
 
