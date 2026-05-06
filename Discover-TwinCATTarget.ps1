@@ -24,6 +24,12 @@
 
 Import-Module TcXaeMgmt
 
+# Suppress progress stream output from all TcXaeMgmt cmdlets globally.
+# Without this, "Searching for Route [Performing Broadcast search...]"
+# from Get-AdsRoute -All is buffered and renders late — appearing on the
+# terminal while Get-Credential is waiting for the password.
+$ProgressPreference = 'SilentlyContinue'
+
 # ---------------------------------------------------------------------------
 # Step 1 – Broadcast search: discover all TwinCAT 3 targets on the network
 #
@@ -72,18 +78,11 @@ Write-Host "`nStep 2: Adding ADS route to '$($target.Name)'..."
 
 $credential = Get-Credential -Message "Enter credentials for TwinCAT target '$($target.Name)'"
 
-# Suppress the "Searching for Route" progress output from Add-AdsRoute
-# so it does not bleed into the credential prompt in the terminal.
-$savedProgress = $ProgressPreference
-$ProgressPreference = 'SilentlyContinue'
-
 $route = Add-AdsRoute `
     -NetId $target.NetId `
     -IPOrHostName $target.Address `
     -Credential $credential `
     -PassThru
-
-$ProgressPreference = $savedProgress
 
 if (-not $route) {
     Write-Error "Failed to add ADS route to '$($target.Name)'."
