@@ -15,7 +15,10 @@
   <ItemGroup>
     <!-- Visual Studio DTE COM automation — provides the EnvDTE namespace used
          to drive TcXaeShell (and Visual Studio) via the automation interface. -->
-    <PackageReference Include="EnvDTE" Version="8.0.3" />
+    <PackageReference Include="EnvDTE" Version="16.7.30328.74" />
+    <!-- Required for the 'dynamic' keyword in SDK-style .NET Framework projects.
+         Without this, CS0656 is thrown at the systemManager dynamic dispatch. -->
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
 
 </Project>
