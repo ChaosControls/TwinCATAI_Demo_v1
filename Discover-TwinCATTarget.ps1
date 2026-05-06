@@ -64,17 +64,17 @@ Write-Host "Selected target: '$($target.Name)'"
 # ---------------------------------------------------------------------------
 # Step 2 – Add ADS route to the discovered target
 #
-# Add-AdsRoute establishes a bidirectional route. When the target's address
-# is supplied by name, it performs a broadcast search to resolve IP/NetId.
-# -PassThru returns the created route object so we can inspect it.
-# Credentials are required for the target Windows/TwinCAT user account.
+# Providing both -NetId AND -IPOrHostName skips the broadcast search entirely
+# (the broadcast is only triggered when the IP is unknown). Since Get-AdsRoute
+# already resolved both values, we pass them directly to avoid the hang.
 # ---------------------------------------------------------------------------
 Write-Host "`nStep 2: Adding ADS route to '$($target.Name)'..."
 
 $credential = Get-Credential -Message "Enter credentials for TwinCAT target '$($target.Name)'"
 
 $route = Add-AdsRoute `
-    -Address $target.Name `
+    -NetId $target.NetId `
+    -IPOrHostName $target.Address `
     -Credential $credential `
     -PassThru
 
