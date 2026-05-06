@@ -87,17 +87,16 @@ Write-Host "ADS route established successfully:"
 $route | Format-List
 
 # ---------------------------------------------------------------------------
-# Step 3 – Retrieve the AMS Net ID of the target
+# Step 3 – Read the AMS Net ID from the already-discovered route object
 #
-# Get-AmsNetId returns the AMS Network Identifier of the specified target,
-# which is required for all subsequent ADS communication with that device.
+# Get-AdsRoute -All already resolved the NetId; no extra cmdlet call needed.
 # ---------------------------------------------------------------------------
-Write-Host "Step 3: Retrieving AMS Net ID for '$($target.Name)'..."
+Write-Host "Step 3: Reading AMS Net ID for '$($target.Name)'..."
 
-$amsNetId = Get-AmsNetId -Target $target.Name
+$amsNetId = $target.NetId
 
 if (-not $amsNetId) {
-    Write-Error "Could not retrieve AMS Net ID for '$($target.Name)'."
+    Write-Error "Could not read AMS Net ID from route object for '$($target.Name)'."
     exit 1
 }
 
