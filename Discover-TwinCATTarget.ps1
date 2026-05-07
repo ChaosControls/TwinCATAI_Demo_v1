@@ -115,7 +115,7 @@ if ($choice -eq '1') {
         -PassThru
 } else {
     $route = Add-AdsRoute `
-        -IPOrHostName $targetIp `
+        -Address $targetIp `
         -Credential $credential `
         -PassThru
 }
