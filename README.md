@@ -1,6 +1,8 @@
 # TwinCAT 3 Auto-Deploy
 
+This is for Demo purposes only and not to be deployed on any working hardware or software. 
 Discovers a TwinCAT 3 target on the network, sets up an ADS route, and deploys a project to it automatically.
+
 
 ---
 
